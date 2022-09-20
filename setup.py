@@ -5,7 +5,7 @@ import sys
 import setuptools
 import os
 
-__version__ = '0.0.2'
+__version__ = '0.0.1'
 
 
 class get_pybind_include(object):
@@ -24,7 +24,7 @@ class get_pybind_include(object):
 
 ext_modules = [
     Extension(
-        'wrapper',
+        'pyVHACD',
         sources=['src/pyVHACD/pyVHACD.cpp'],
         include_dirs=[
             # Path to pybind11 headers
@@ -95,12 +95,12 @@ class BuildExt(build_ext):
         build_ext.build_extensions(self)
 
 setup(
-    name='wrapper',
+    name='pyVHACD',
     version=__version__,
-    author='Christian Jaques',
-    author_email='christian.jaques@idiap.ch',
-    url='http://www.christianjaques.com/code/',
-    description='PyBind example 1',
+    author='Thomas Wolf',
+    author_email='thomas@huggingface.co',
+    url='https://github.com/thomwolf/pyVHACD',
+    description='Python bindings for VHACD',
     long_description='',
     ext_modules=ext_modules,
     install_requires=['pybind11>=2.2'],

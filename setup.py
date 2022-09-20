@@ -33,6 +33,7 @@ setup(
     description='Python bindings for VHACD',
     long_description='',
     ext_modules=ext_modules,
+    install_requires=['pybind11>=2.2'],
     cmdclass={'build_ext': build_ext},
     zip_safe=False,
     python_requires=">=3.6",

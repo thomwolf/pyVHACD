@@ -30,3 +30,9 @@
 *.exe
 *.out
 *.app
+
+# pybind
+build/
+var/
+.python-version
+*.so

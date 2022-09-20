@@ -6,6 +6,9 @@
 #define VHACD_DISABLE_THREADING 0
 #include "VHACD.h"
 
+#define STRINGIFY(x) #x
+#define MACRO_STRINGIFY(x) STRINGIFY(x)
+
 namespace py = pybind11;
 
 // Return a list of convex hulls
@@ -111,5 +114,10 @@ std::vector<std::pair<py::array_t<double>, py::array_t<uint32_t>>> compute_vhacd
 PYBIND11_MODULE(pyVHACD, m) {
 	    m.doc() = "Python bindings for the V-HACD algorithm"; // optional module docstring
 	    m.def("compute_vhacd", &compute_vhacd, "Compute convex hulls");
-}
 
+#ifdef VERSION_INFO
+    m.attr("__version__") = MACRO_STRINGIFY(VERSION_INFO);
+#else
+    m.attr("__version__") = "dev";
+#endif
+}

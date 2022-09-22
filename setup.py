@@ -31,7 +31,7 @@ setup(
     author_email='thomas@huggingface.co',
     url='https://github.com/thomwolf/pyVHACD',
     description='Python bindings for VHACD',
-    long_description='',
+    long_description='Python bindings for VHACD',
     ext_modules=ext_modules,
     extras_require={"test": ["pytest", "numpy"]},
     install_requires=['pybind11>=2.2', 'numpy'],

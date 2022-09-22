@@ -11,6 +11,13 @@ Contains a single method: `output = compute_vhacd(points, faces)` which take as 
 
 Gives as output a list (number of convex hulls) of pairs of points-faces for each convex hull.
 
+# To install
+```
+pip install pyVHACD
+```
+
+# To use
+
 Examples usage with pyvista:
 ```
 import pyvista

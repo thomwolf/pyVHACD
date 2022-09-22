@@ -16,7 +16,7 @@ Examples usage with pyvista:
 import pyvista
 import pyVHACD
 
-mesh = pyvista.Cube().triangulate()
+mesh = pyvista.examples.download_bunny().triangulate()
 
 outputs = pyVHACD.compute_vhacd(mesh.points, mesh.faces)
 

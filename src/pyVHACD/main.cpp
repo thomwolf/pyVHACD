@@ -15,7 +15,20 @@ namespace py = pybind11;
 // Each convex hull is a tuple of (vertices, indices)
 // vertices is a numpy array of shape (n, 3)
 // indices is a numpy array of shape (m,)
-std::vector<std::pair<py::array_t<double>, py::array_t<uint32_t>>> compute_vhacd(py::array_t<double> points, py::array_t<uint32_t> faces) {
+std::vector<std::pair<py::array_t<double>, py::array_t<uint32_t>>> compute_vhacd(
+	py::array_t<double> points,
+	py::array_t<uint32_t> faces,
+	uint32_t maxConvexHulls,
+	uint32_t resolution,
+	double minimumVolumePercentErrorAllowed,
+	uint32_t maxRecursionDepth,
+	bool shrinkWrap,
+	std::string fillMode,
+	uint32_t maxNumVerticesPerCH,
+	bool asyncACD,
+	uint32_t minEdgeLength,
+	bool findBestPlane
+) {
 
 	/*  read input arrays buffer_info */
 	auto buf_points = points.request();
@@ -38,7 +51,33 @@ std::vector<std::pair<py::array_t<double>, py::array_t<uint32_t>>> compute_vhacd
 		triangles[3*i+2] = ptr_faces[4*i+3];
 	}
 
+	// Create the VHACD parameters
 	VHACD::IVHACD::Parameters p;
+	p.m_maxConvexHulls = maxConvexHulls;
+	p.m_resolution = resolution;
+	p.m_minimumVolumePercentErrorAllowed = minimumVolumePercentErrorAllowed;
+	p.m_maxRecursionDepth = maxRecursionDepth;
+	p.m_shrinkWrap = shrinkWrap;
+	p.m_maxNumVerticesPerCH = maxNumVerticesPerCH;
+	p.m_asyncACD = asyncACD;
+	p.m_minEdgeLength = minEdgeLength;
+	p.m_findBestPlane = findBestPlane;
+	if ( fillMode == "flood" )
+	{
+		p.m_fillMode = VHACD::FillMode::FLOOD_FILL;
+	}
+	else if ( fillMode == "raycast" )
+	{
+		p.m_fillMode = VHACD::FillMode::RAYCAST_FILL;
+	}
+	else if ( fillMode == "surface" )
+	{
+		p.m_fillMode = VHACD::FillMode::SURFACE_ONLY;
+	}
+	else
+	{
+		printf("Invalid fill mode, only valid options are 'flood', 'raycast', and 'surface'\n");
+	}
 
 #if VHACD_DISABLE_THREADING
 	VHACD::IVHACD *iface = VHACD::CreateVHACD();
@@ -113,7 +152,21 @@ std::vector<std::pair<py::array_t<double>, py::array_t<uint32_t>>> compute_vhacd
 /* Wrapping routines with PyBind */
 PYBIND11_MODULE(pyVHACD, m) {
 	    m.doc() = "Python bindings for the V-HACD algorithm"; // optional module docstring
-	    m.def("compute_vhacd", &compute_vhacd, "Compute convex hulls");
+	    m.def(
+			"compute_vhacd", &compute_vhacd, "Compute convex hulls",
+			py::arg("points"),
+			py::arg("faces"),
+			py::arg("maxConvexHulls") = 64,
+			py::arg("resolution") = 400000,
+			py::arg("minimumVolumePercentErrorAllowed") = 1.0,
+			py::arg("maxRecursionDepth") = 10,
+			py::arg("shrinkWrap") = true,
+			py::arg("fillMode") = "flood",
+			py::arg("maxNumVerticesPerCH") = 64,
+			py::arg("asyncACD") = true,
+			py::arg("minEdgeLength") = 2,
+			py::arg("findBestPlane") = false
+		);
 
 #ifdef VERSION_INFO
     m.attr("__version__") = MACRO_STRINGIFY(VERSION_INFO);

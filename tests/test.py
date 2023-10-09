@@ -1,4 +1,4 @@
-import pyVHACD as pv
+import vhacdx as pv
 import numpy as np
 
 points = np.array(
@@ -71,7 +71,8 @@ faces = np.array(
 
 output = pv.compute_vhacd(points, faces)
 
-assert pv.__version__ == "0.0.2"
+# check that the version is a string and roughly semantic-version
+assert pv.__version__.count(".") == 2
 assert isinstance(output, list)
 assert len(output) == 1
 assert len(output[0]) == 2

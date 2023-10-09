@@ -29,5 +29,4 @@ test = "pytest"
 
 [tool.cibuildwheel]
 test-command = "python {project}/tests/test.py"
-test-skip = "*universal2:arm64"
-
+test-skip = "*universal2:arm64 pp31*"

@@ -1,10 +1,33 @@
 [build-system]
 requires = [
     "setuptools>=42",
+    "wheel",
     "pybind11>=2.10.0",
 ]
 build-backend = "setuptools.build_meta"
 
+
+[project]
+name = "vhacdx"
+version = "0.0.3"
+requires-python = ">=3.6"
+
+authors = [{name = "Thomas Wolf", email = "thomas@huggingface.co"}]
+description = "Python bindings for VHACD"
+urls = {Homepage = "https://github.com/trimesh/vhacdx"}
+dependencies = ["numpy"]
+
+[project.readme]
+file = "README.md"
+content-type = "text/markdown"
+ 
+[options]
+zip_safe = false
+
+[options.extras_require]
+test = "pytest"
+
 [tool.cibuildwheel]
 test-command = "python {project}/tests/test.py"
 test-skip = "*universal2:arm64"
+

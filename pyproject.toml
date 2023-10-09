@@ -10,7 +10,7 @@ build-backend = "setuptools.build_meta"
 [project]
 name = "vhacdx"
 version = "0.0.3"
-requires-python = ">=3.6"
+requires-python = ">=3.7"
 
 authors = [{name = "Thomas Wolf", email = "thomas@huggingface.co"}]
 description = "Python bindings for VHACD"

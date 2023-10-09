@@ -31,7 +31,7 @@ test = "pytest"
 test-command = "python {project}/tests/test.py"
 
 # skip platforms that don't have numpy wheels
-test-skip = "*universal2:arm64 pp31* *i686"
+test-skip = "*universal2:arm64 pp31* *i686 *musllinux*"
 
 
 [tool.ruff]

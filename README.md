@@ -1,7 +1,7 @@
-# pyVHACD
+# vhacdx
 Python bindings for V-HACD
 
-A very simple and raw python binding for V-HACD (https://github.com/kmammou/v-hacd)
+A very simple and raw python binding for V-HACD (https://github.com/kmammou/v-hacd) that is forked from [thomwolf/pyVHACD](https://github.com/thomwolf/pyVHACD).
 
 Generate a set of convex hulls for a triangulated mesh.
 
@@ -13,7 +13,7 @@ Gives as output a list (number of convex hulls) of pairs of points-faces for eac
 
 # To install
 ```
-pip install pyVHACD
+pip install vhacdx
 ```
 
 # To use
@@ -21,7 +21,8 @@ pip install pyVHACD
 Examples usage with pyvista:
 ```
 import pyvista
-import pyVHACD
+import vhacdx
+
 
 mesh = pyvista.examples.download_bunny().triangulate()
 

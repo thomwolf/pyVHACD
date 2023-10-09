@@ -150,7 +150,7 @@ std::vector<std::pair<py::array_t<double>, py::array_t<uint32_t>>> compute_vhacd
 
 
 /* Wrapping routines with PyBind */
-PYBIND11_MODULE(pyVHACD, m) {
+PYBIND11_MODULE(vhacdx, m) {
 	    m.doc() = "Python bindings for the V-HACD algorithm"; // optional module docstring
 	    m.def(
 			"compute_vhacd", &compute_vhacd, "Compute convex hulls",

@@ -1,5 +1,5 @@
-import vhacdx as pv
 import numpy as np
+import vhacdx as pv
 
 points = np.array(
     [

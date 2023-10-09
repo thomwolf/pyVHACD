@@ -1,7 +1,8 @@
 # Available at setup time due to pyproject.toml
+import os
+
 from pybind11.setup_helpers import Pybind11Extension, build_ext
 from setuptools import setup
-import os
 
 # get version from pyproject.toml to pass in to build macro
 with open(

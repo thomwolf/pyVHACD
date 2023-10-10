@@ -9,7 +9,7 @@ build-backend = "setuptools.build_meta"
 
 [project]
 name = "vhacdx"
-version = "0.0.3"
+version = "0.0.4"
 requires-python = ">=3.7"
 
 authors = [{name = "Thomas Wolf", email = "thomas@huggingface.co"}]
@@ -28,7 +28,8 @@ zip_safe = false
 test = "pytest"
 
 [tool.cibuildwheel]
-test-command = "python {project}/tests/test.py"
+test-requires = "pytest"
+test-command = "pytest {project}/tests"
 
 # skip platforms that don't have numpy wheels
 test-skip = "*universal2:arm64 pp31* *i686 *musllinux*"

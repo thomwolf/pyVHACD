@@ -24,8 +24,8 @@ content-type = "text/markdown"
 [options]
 zip_safe = false
 
-[options.extras_require]
-test = "pytest"
+[project.optional-dependencies]
+test = ["pytest"]
 
 [tool.cibuildwheel]
 test-requires = "pytest"
